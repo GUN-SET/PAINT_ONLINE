@@ -4,9 +4,14 @@ class CanvasState {
 	canvas = null;
 	undoList = []
 	redoList = []
+	username = ""
 
 	constructor() {
 		makeAutoObservable(this)
+	}
+
+	setUsername(username) {
+		this.username = username
 	}
 
 	setCanvas(canvas) {
@@ -26,6 +31,7 @@ class CanvasState {
 		if (this.undoList.length > 0) {
 			let dataUrl = this.undoList.pop()
 			this.redoList.push(this.canvas.toDataURL())
+
 			let img = new Image()
 			img.src = dataUrl
 			img.onload = () => {
